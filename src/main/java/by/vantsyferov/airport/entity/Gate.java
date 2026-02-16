@@ -11,7 +11,13 @@ public class Gate {
   private Airplane airplane;
   private static Gate instance;
 
-  public Gate() {
+  public Gate(int gateNumber,int capacity){
+    this.gateNumber = gateNumber;
+    this.capacity = capacity;
+  }
+
+  private Gate() {
+
   }
 
   public static Gate getInstance(){

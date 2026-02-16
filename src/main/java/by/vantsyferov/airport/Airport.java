@@ -1,14 +1,16 @@
-package by.vantsyferov.airport;
 
 import by.vantsyferov.airport.entity.Airplane;
-import by.vantsyferov.airport.entity.Gate;
-import by.vantsyferov.airport.entity.Passenger;
-import by.vantsyferov.airport.entity.impl.AirplaneArrivingState;
-import by.vantsyferov.airport.service.GateServiceInt;
-import by.vantsyferov.airport.service.impl.GateService;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class Airport {
+static void main() {
+  Airplane airplane1 = new Airplane("743A31", 100);
+  Airplane airplane2 = new Airplane("743A32", 100);
+  Airplane airplane3 = new Airplane("743A33", 100);
+  Airplane airplane4 = new Airplane("743A34", 100);
+
+  airplane1.run();
+  airplane2.run();
+  airplane3.run();
+  airplane4.run();
+
 }

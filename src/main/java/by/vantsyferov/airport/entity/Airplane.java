@@ -1,5 +1,10 @@
 package by.vantsyferov.airport.entity;
 
+import by.vantsyferov.airport.entity.impl.AirplaneArrivingState;
+import by.vantsyferov.airport.entity.impl.AirplaneDepartedState;
+import by.vantsyferov.airport.entity.impl.AirplaneWaitingState;
+import by.vantsyferov.airport.service.impl.GateService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +13,23 @@ public class Airplane extends Thread{
   private int capacity;
   private List<Passenger> passengerList;
   private AirplaneState airplaneState;
+  private static Airplane instance;
 
-  public Airplane(String name, int capacity, List<Passenger> passengerList, AirplaneState airplaneState) {
+
+  public Airplane(String name, int capacity) {
     super(name);
     this.capacity = capacity;
-    this.passengerList = passengerList;
-    this.airplaneState = airplaneState;
+  }
+
+  public Airplane(){
+
+  }
+
+  public static Airplane getInstance() {
+    if(instance == null){
+      instance = new Airplane();
+    }
+    return instance;
   }
 
   public int getCapacity() {
@@ -44,9 +60,16 @@ public class Airplane extends Thread{
     passengerList.add(passenger);
   }
 
-  public List<Passenger> unboardPassenger(){
-    List<Passenger> unboardPassengerList = new ArrayList<>(passengerList);
-    passengerList.clear();
-    return unboardPassengerList;
+  public void unboardPassenger(){
+    this.passengerList.clear();
+  }
+
+  @Override
+  public void run(){
+    setAirplaneState(new AirplaneArrivingState());
+    while (!(airplaneState instanceof AirplaneDepartedState)){
+      airplaneState.handle(this);
+    }
+    airplaneState.handle(this);
   }
 }

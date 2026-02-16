@@ -1,4 +1,15 @@
 package by.vantsyferov.airport.entity.impl;
 
-public class AirplaneDepartedState {
+import by.vantsyferov.airport.entity.Airplane;
+import by.vantsyferov.airport.entity.AirplaneState;
+import by.vantsyferov.airport.service.impl.GateService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class AirplaneDepartedState implements AirplaneState {
+  static Logger logger = LogManager.getLogger();
+  @Override
+  public void handle(Airplane airplane) {
+
+  }
 }
