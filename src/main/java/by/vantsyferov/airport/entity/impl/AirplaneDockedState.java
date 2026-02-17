@@ -17,7 +17,15 @@ public class AirplaneDockedState implements AirplaneState {
   @Override
   public void handle(Airplane airplane) {
     try {
-      TimeUnit.SECONDS.sleep(5);
+
+      if(airplane.getPassengerAmount() == 0 && airplane.getMaintainStatus()){
+        TimeUnit.SECONDS.sleep(3);
+        logger.info("Boarding passengers to airplane {}... Boarded: {}", airplane.getName(), airplane.getPassengerAmount());
+        service.boardPassengers(airplane);
+      }
+      if(airplane.getPassengerAmount() != 0 && !airplane.getMaintainStatus()){
+        logger.info("");
+      }
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }

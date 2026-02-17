@@ -1,19 +1,15 @@
 package by.vantsyferov.airport.entity;
 
-import by.vantsyferov.airport.entity.impl.AirplaneDockedState;
-
 public class Gate {
   private int gateNumber;
   private int capacity;
+  private int passengerAmount;
 
   public Gate(int gateNumber,int capacity){
     this.gateNumber = gateNumber;
     this.capacity = capacity;
   }
 
-  private Gate() {
-
-  }
 
   public int getGateNumber(){
     return gateNumber;
@@ -23,13 +19,19 @@ public class Gate {
     return capacity;
   }
 
-  public Airplane getAirplane(){
-    return airplane;
+  public int getPassengerAmount() {
+    return passengerAmount;
   }
 
-  public void dockAirplane(){
-    this.airplane.setAirplaneState(new AirplaneDockedState());
+  public void setPassengerAmount(int passengerAmount) {
+    this.passengerAmount = passengerAmount;
   }
 
+  public void setCapacity(int capacity) {
+    this.capacity = capacity;
+  }
 
+  public void setGateNumber(int gateNumber) {
+    this.gateNumber = gateNumber;
+  }
 }

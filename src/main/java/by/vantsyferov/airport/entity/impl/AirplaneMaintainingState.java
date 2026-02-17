@@ -17,7 +17,7 @@ public class AirplaneMaintainingState implements AirplaneState {
     try {
       logger.info("Maintaining airplane {}...", airplane.getName());
       TimeUnit.SECONDS.sleep(15);
-      airplane.setMaintainStatus(true);
+      service.maintainAirplane(airplane);
       logger.info("Airplane {} is maintained, requesting dock to board passengers...", airplane.getName());
       airplane.setAirplaneState(new AirplaneDockedState());
     } catch (InterruptedException e) {

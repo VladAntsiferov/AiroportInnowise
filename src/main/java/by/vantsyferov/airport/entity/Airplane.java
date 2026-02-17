@@ -18,10 +18,6 @@ public class Airplane extends Thread{
     this.isMaintained = false;
   }
 
-  public Airplane(){
-
-  }
-
   public int getCapacity() {
     return capacity;
   }
@@ -54,9 +50,6 @@ public class Airplane extends Thread{
     this.passengerAmount = passengerAmount;
   }
 
-  public void unboardPassenger(){
-    this.passengerAmount = 0;
-  }
 
   public void setMaintainStatus(boolean maintained) {
     isMaintained = maintained;
