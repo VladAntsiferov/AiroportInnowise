@@ -2,34 +2,24 @@ package by.vantsyferov.airport.entity;
 
 import by.vantsyferov.airport.entity.impl.AirplaneArrivingState;
 import by.vantsyferov.airport.entity.impl.AirplaneDepartedState;
-import by.vantsyferov.airport.entity.impl.AirplaneWaitingState;
-import by.vantsyferov.airport.service.impl.GateService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Airplane extends Thread{
   private String name;
   private int capacity;
-  private List<Passenger> passengerList;
+  private int passengerAmount;
   private AirplaneState airplaneState;
-  private static Airplane instance;
+  private Gate currentGate;
 
+  private boolean isMaintained;
 
   public Airplane(String name, int capacity) {
     super(name);
     this.capacity = capacity;
+    this.isMaintained = false;
   }
 
   public Airplane(){
 
-  }
-
-  public static Airplane getInstance() {
-    if(instance == null){
-      instance = new Airplane();
-    }
-    return instance;
   }
 
   public int getCapacity() {
@@ -40,14 +30,6 @@ public class Airplane extends Thread{
     this.capacity = capacity;
   }
 
-  public List<Passenger> getPassengerList() {
-    return passengerList;
-  }
-
-  public void setPassengerList(List<Passenger> passengerList) {
-    this.passengerList = passengerList;
-  }
-
   public AirplaneState getAirplaneState() {
     return airplaneState;
   }
@@ -56,13 +38,34 @@ public class Airplane extends Thread{
     this.airplaneState = airplaneState;
   }
 
-  public void boardPassenger(Passenger passenger){
-    passengerList.add(passenger);
+  public Gate getCurrentGate() {
+    return currentGate;
+  }
+
+  public void setCurrentGate(Gate currentGate) {
+    this.currentGate = currentGate;
+  }
+
+  public int getPassengerAmount() {
+    return passengerAmount;
+  }
+
+  public void setPassengerAmount(int passengerAmount) {
+    this.passengerAmount = passengerAmount;
   }
 
   public void unboardPassenger(){
-    this.passengerList.clear();
+    this.passengerAmount = 0;
   }
+
+  public void setMaintainStatus(boolean maintained) {
+    isMaintained = maintained;
+  }
+
+  public boolean getMaintainStatus() {
+    return isMaintained;
+  }
+
 
   @Override
   public void run(){
@@ -72,4 +75,5 @@ public class Airplane extends Thread{
     }
     airplaneState.handle(this);
   }
+
 }
