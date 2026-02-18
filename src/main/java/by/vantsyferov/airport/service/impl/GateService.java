@@ -3,17 +3,13 @@ package by.vantsyferov.airport.service.impl;
 import by.vantsyferov.airport.entity.Airplane;
 import by.vantsyferov.airport.entity.Gate;
 import by.vantsyferov.airport.repository.GateRepository;
-import by.vantsyferov.airport.service.GateServiceInt;
+import by.vantsyferov.airport.service.GateServiceInterface;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-public class GateService implements GateServiceInt {
-  private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+public class GateService implements GateServiceInterface {
   private static GateRepository gateRepository = GateRepository.getInstance();
   static Logger logger = LogManager.getLogger();
 
@@ -56,18 +52,5 @@ public class GateService implements GateServiceInt {
     airplane.setPassengerAmount(0);
   }
 
-  public void startPassengerGeneration(Gate gate) {
-
-    scheduler.scheduleAtFixedRate(() -> {
-
-      int random = ThreadLocalRandom.current().nextInt(1, 6);
-      gateRepository.addPassengers(gate, random);
-
-    }, 0, 2, TimeUnit.SECONDS);
-  }
-
-  public void stop() {
-    scheduler.shutdown();
-  }
 
 }

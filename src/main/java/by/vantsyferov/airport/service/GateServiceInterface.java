@@ -3,7 +3,7 @@ package by.vantsyferov.airport.service;
 import by.vantsyferov.airport.entity.Airplane;
 import by.vantsyferov.airport.entity.Gate;
 
-public interface GateServiceInt {
+public interface GateServiceInterface {
 
   Gate requestFreeGate();
 
