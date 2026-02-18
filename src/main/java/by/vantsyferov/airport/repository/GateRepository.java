@@ -26,8 +26,8 @@ public class GateRepository {
 
   public static GateRepository getInstance() {
     if (!isCreate.get()) {
-      lock.lock();
       try {
+        lock.lock();
         if (instance == null) {
           instance = new GateRepository();
           isCreate.set(true);
@@ -40,8 +40,8 @@ public class GateRepository {
   }
 
   public void add(Gate gate) {
-    lock.lock();
     try {
+      lock.lock();
       freeGateQueue.addLast(gate);
     } finally {
       lock.unlock();
@@ -49,8 +49,8 @@ public class GateRepository {
   }
 
   public Gate getFreeGate() {
-    lock.lock();
     try {
+      lock.lock();
       return freeGateQueue.pollFirst();
     } finally {
       lock.unlock();
@@ -62,8 +62,8 @@ public class GateRepository {
   }
 
   public void addPassengers(Gate gate, int amount) {
-    lock.lock();
     try {
+      lock.lock();
       if (gate.getPassengerAmount() < gate.getCapacity()) {
         logger.info("Arrived {} passengers to gate {}", amount, gate.getGateNumber());
         gate.setPassengerAmount(gate.getPassengerAmount() + amount);
