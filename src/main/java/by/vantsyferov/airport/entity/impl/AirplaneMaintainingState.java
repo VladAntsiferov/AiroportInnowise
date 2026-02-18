@@ -2,6 +2,7 @@ package by.vantsyferov.airport.entity.impl;
 
 import by.vantsyferov.airport.entity.Airplane;
 import by.vantsyferov.airport.entity.AirplaneState;
+import by.vantsyferov.airport.entity.Gate;
 import by.vantsyferov.airport.service.GateServiceInt;
 import by.vantsyferov.airport.service.impl.GateService;
 import org.apache.logging.log4j.LogManager;
@@ -19,6 +20,9 @@ public class AirplaneMaintainingState implements AirplaneState {
       TimeUnit.SECONDS.sleep(15);
       service.maintainAirplane(airplane);
       logger.info("Airplane {} is maintained, requesting dock to board passengers...", airplane.getName());
+      Gate gate = service.requestFreeGate();
+      airplane.setCurrentGate(gate);
+      logger.info("Airplane {} docked to gate No. {}", airplane.getName(), airplane.getCurrentGate().getGateNumber());
       airplane.setAirplaneState(new AirplaneDockedState());
     } catch (InterruptedException e) {
       throw new RuntimeException(e);

@@ -9,4 +9,5 @@ public interface GateServiceInt {
   void maintainAirplane(Airplane airplane);
   void undockAirplane(Airplane airplane);
   void boardPassengers(Airplane airplane);
+  void unboardPassengers(Airplane airplane);
 }

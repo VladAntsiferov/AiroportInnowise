@@ -7,9 +7,13 @@ import by.vantsyferov.airport.service.GateServiceInt;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 public class GateService implements GateServiceInt {
+  private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
   private static GateRepository gateRepository = GateRepository.getInstance();
   static Logger logger = LogManager.getLogger();
 
@@ -35,6 +39,7 @@ public class GateService implements GateServiceInt {
   @Override
   public void undockAirplane(Airplane airplane) {
     gateRepository.add(airplane.getCurrentGate());
+    airplane.setCurrentGate(null);
   }
 
   @Override
@@ -45,4 +50,24 @@ public class GateService implements GateServiceInt {
       boardingGate.setPassengerAmount(boardingGate.getPassengerAmount() - 1);
     }
   }
+
+  @Override
+  public void unboardPassengers(Airplane airplane){
+    airplane.setPassengerAmount(0);
+  }
+
+  public void startPassengerGeneration(Gate gate) {
+
+    scheduler.scheduleAtFixedRate(() -> {
+
+      int random = ThreadLocalRandom.current().nextInt(1, 6);
+      gateRepository.addPassengers(gate, random);
+
+    }, 0, 2, TimeUnit.SECONDS);
+  }
+
+  public void stop() {
+    scheduler.shutdown();
+  }
+
 }

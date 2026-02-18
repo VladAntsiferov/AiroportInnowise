@@ -1,6 +1,8 @@
 package by.vantsyferov.airport.repository;
 
 import by.vantsyferov.airport.entity.Gate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class GateRepository {
+public class GateRepository{
 
   private static GateRepository instance;
   private static ReentrantLock lock = new ReentrantLock();
@@ -24,6 +26,7 @@ public class GateRepository {
                   new Gate(4, 100)
           )){
   };
+  static Logger logger = LogManager.getLogger();
 
   public static GateRepository getInstance(){
     if(!isCreate.get()){
@@ -49,10 +52,6 @@ public class GateRepository {
     }
   }
 
-  public void remove(Gate gate){
-    freeGateQueue.remove(gate);
-  }
-
   public Gate getFreeGate(){
     lock.lock();
     try {
@@ -62,4 +61,22 @@ public class GateRepository {
       lock.unlock();
     }
   }
+
+  public LinkedList<Gate> getGateQueue(){
+    return freeGateQueue;
+  }
+
+  public void addPassengers(Gate gate, int amount){
+    lock.lock();
+    try {
+      if(gate.getPassengerAmount() < gate.getCapacity()){
+        logger.info("Arrived {} passengers to gate {}", amount, gate.getGateNumber());
+        gate.setPassengerAmount(gate.getPassengerAmount() + amount);
+        logger.info("Currently in gate {} are {} passengers",gate.getGateNumber(), gate.getPassengerAmount());
+      }
+    } finally {
+      lock.unlock();
+    }
+  }
+
 }

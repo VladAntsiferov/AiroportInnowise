@@ -19,8 +19,8 @@ public class AirplaneArrivingState implements AirplaneState {
   public void handle(Airplane airplane) {
     logger.info("Airplane {} arrived. Requesting dock...", airplane.getName());
     Gate gate = service.requestFreeGate();
-    logger.info("Airplane {} docked to gate No. {}", airplane.getName(), gate.getGateNumber());
     airplane.setCurrentGate(gate);
+    logger.info("Airplane {} docked to gate No. {}", airplane.getName(), airplane.getCurrentGate().getGateNumber());
     airplane.setAirplaneState(new AirplaneDockedState());
   }
 }
