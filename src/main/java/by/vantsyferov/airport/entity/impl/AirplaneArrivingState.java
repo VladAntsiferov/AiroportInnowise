@@ -8,8 +8,6 @@ import by.vantsyferov.airport.service.impl.GateService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class AirplaneArrivingState implements AirplaneState {
   private final static GateServiceInt service = new GateService();

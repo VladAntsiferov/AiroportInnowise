@@ -43,7 +43,7 @@ public class GateService implements GateServiceInt {
   }
 
   @Override
-  public void boardPassengers(Airplane airplane){
+  public void boardPassengers(Airplane airplane) {
     Gate boardingGate = airplane.getCurrentGate();
     while ((airplane.getPassengerAmount() < airplane.getCapacity()) && (boardingGate.getPassengerAmount() > 0)) {
       airplane.setPassengerAmount(airplane.getPassengerAmount() + 1);
@@ -52,7 +52,7 @@ public class GateService implements GateServiceInt {
   }
 
   @Override
-  public void unboardPassengers(Airplane airplane){
+  public void unboardPassengers(Airplane airplane) {
     airplane.setPassengerAmount(0);
   }
 

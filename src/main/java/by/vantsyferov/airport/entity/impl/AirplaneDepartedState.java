@@ -10,8 +10,9 @@ import org.apache.logging.log4j.Logger;
 import java.util.concurrent.TimeUnit;
 
 public class AirplaneDepartedState implements AirplaneState {
-  static Logger logger = LogManager.getLogger();
   private final static GateServiceInt service = new GateService();
+  static Logger logger = LogManager.getLogger();
+
   @Override
   public void handle(Airplane airplane) {
     try {

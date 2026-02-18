@@ -5,17 +5,17 @@ public class Gate {
   private int capacity;
   private int passengerAmount;
 
-  public Gate(int gateNumber,int capacity){
+  public Gate(int gateNumber, int capacity) {
     this.gateNumber = gateNumber;
     this.capacity = capacity;
   }
 
 
-  public int getGateNumber(){
+  public int getGateNumber() {
     return gateNumber;
   }
 
-  public int getCapacity(){
+  public int getCapacity() {
     return capacity;
   }
 

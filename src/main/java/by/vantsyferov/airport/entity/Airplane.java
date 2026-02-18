@@ -3,13 +3,12 @@ package by.vantsyferov.airport.entity;
 import by.vantsyferov.airport.entity.impl.AirplaneArrivingState;
 import by.vantsyferov.airport.entity.impl.AirplaneDepartedState;
 
-public class Airplane extends Thread{
+public class Airplane extends Thread {
   private String name;
   private int capacity;
   private int passengerAmount;
   private AirplaneState airplaneState;
   private Gate currentGate;
-
   private boolean isMaintained;
 
   public Airplane(String name, int capacity) {
@@ -61,9 +60,9 @@ public class Airplane extends Thread{
 
 
   @Override
-  public void run(){
+  public void run() {
     setAirplaneState(new AirplaneArrivingState());
-    while (!(airplaneState instanceof AirplaneDepartedState)){
+    while (!(airplaneState instanceof AirplaneDepartedState)) {
       airplaneState.handle(this);
     }
     airplaneState.handle(this);

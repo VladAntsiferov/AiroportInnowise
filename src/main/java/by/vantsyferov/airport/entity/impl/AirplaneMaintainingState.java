@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class AirplaneMaintainingState implements AirplaneState {
   private final static GateServiceInt service = new GateService();
   static Logger logger = LogManager.getLogger();
+
   @Override
   public void handle(Airplane airplane) {
     try {

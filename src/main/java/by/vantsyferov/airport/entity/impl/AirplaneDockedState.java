@@ -17,13 +17,13 @@ public class AirplaneDockedState implements AirplaneState {
   public void handle(Airplane airplane) {
     try {
 
-      if(airplane.getPassengerAmount() != 0){
+      if (airplane.getPassengerAmount() != 0) {
         logger.info("Unboarding passengers from airplane {}...", airplane.getName());
         TimeUnit.SECONDS.sleep(3);
         service.unboardPassengers(airplane);
         return;
       }
-      if(!airplane.getMaintainStatus()){
+      if (!airplane.getMaintainStatus()) {
         logger.info("Airplane {} undocked to maintain", airplane.getName());
         service.undockAirplane(airplane);
         airplane.setAirplaneState(new AirplaneMaintainingState());
