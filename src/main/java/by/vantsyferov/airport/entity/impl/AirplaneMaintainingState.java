@@ -18,6 +18,7 @@ public class AirplaneMaintainingState implements AirplaneState {
   private static final GateService gateService = new GateServiceImpl();
   private static final MaintainAirplaneService maintainService = new MaintainAirplaneServiceImpl();
   private static final DockServiceImpl dockService = new DockServiceImpl();
+
   @Override
   public void handle(Airplane airplane) {
     try {

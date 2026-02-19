@@ -1,6 +1,5 @@
 package by.vantsyferov.airport.service.impl;
 
-import by.vantsyferov.airport.entity.Airplane;
 import by.vantsyferov.airport.entity.Gate;
 import by.vantsyferov.airport.repository.GateRepository;
 import by.vantsyferov.airport.service.GateService;

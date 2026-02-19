@@ -3,10 +3,8 @@ package by.vantsyferov.airport.entity.impl;
 import by.vantsyferov.airport.entity.Airplane;
 import by.vantsyferov.airport.entity.AirplaneState;
 import by.vantsyferov.airport.service.BoardPassengerService;
-import by.vantsyferov.airport.service.GateService;
 import by.vantsyferov.airport.service.impl.BoardPassengerServiceImpl;
 import by.vantsyferov.airport.service.impl.DockServiceImpl;
-import by.vantsyferov.airport.service.impl.GateServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
