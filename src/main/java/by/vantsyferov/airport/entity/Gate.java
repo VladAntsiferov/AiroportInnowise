@@ -1,8 +1,8 @@
 package by.vantsyferov.airport.entity;
 
 public class Gate {
-  private int gateNumber;
-  private int capacity;
+  private final int gateNumber;
+  private final int capacity;
   private int passengerAmount;
 
   public Gate(int gateNumber, int capacity) {
@@ -25,14 +25,6 @@ public class Gate {
 
   public void setPassengerAmount(int passengerAmount) {
     this.passengerAmount = passengerAmount;
-  }
-
-  public void setCapacity(int capacity) {
-    this.capacity = capacity;
-  }
-
-  public void setGateNumber(int gateNumber) {
-    this.gateNumber = gateNumber;
   }
 
 }

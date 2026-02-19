@@ -1,12 +1,12 @@
 
 import by.vantsyferov.airport.entity.Airplane;
 import by.vantsyferov.airport.repository.GateRepository;
-import by.vantsyferov.airport.service.GateServiceInterface;
-import by.vantsyferov.airport.service.impl.GateService;
+import by.vantsyferov.airport.service.GateService;
+import by.vantsyferov.airport.service.impl.GateServiceImpl;
 
 
 void main() {
-  GateServiceInterface service = new GateService();
+  GateService service = new GateServiceImpl();
   GateRepository repository = GateRepository.getInstance();
   Airplane airplane1 = new Airplane("743A31", 150);
   Airplane airplane2 = new Airplane("743A32", 100);

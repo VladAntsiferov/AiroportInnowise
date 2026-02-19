@@ -2,16 +2,16 @@ package by.vantsyferov.airport.entity.impl;
 
 import by.vantsyferov.airport.entity.Airplane;
 import by.vantsyferov.airport.entity.AirplaneState;
-import by.vantsyferov.airport.service.GateServiceInterface;
-import by.vantsyferov.airport.service.impl.GateService;
+import by.vantsyferov.airport.service.DockService;
+import by.vantsyferov.airport.service.impl.DockServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.TimeUnit;
 
 public class AirplaneDepartedState implements AirplaneState {
-  private final static GateServiceInterface service = new GateService();
   static Logger logger = LogManager.getLogger();
+  private static final DockService service = new DockServiceImpl();
 
   @Override
   public void handle(Airplane airplane) {

@@ -11,10 +11,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class GateRepository {
 
+  static Logger logger = LogManager.getLogger();
   private static GateRepository instance;
   private static ReentrantLock lock = new ReentrantLock();
   private static AtomicBoolean isCreate = new AtomicBoolean(false);
-  private static LinkedList<Gate> freeGateQueue = new LinkedList<>(Arrays.
+  private LinkedList<Gate> freeGateQueue = new LinkedList<>(Arrays.
           asList(
                   new Gate(1, 100),
                   new Gate(2, 100),
@@ -22,7 +23,6 @@ public class GateRepository {
                   new Gate(4, 100)
           )) {
   };
-  static Logger logger = LogManager.getLogger();
 
   public static GateRepository getInstance() {
     if (!isCreate.get()) {
