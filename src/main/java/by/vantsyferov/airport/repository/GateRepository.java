@@ -57,10 +57,6 @@ public class GateRepository {
     }
   }
 
-  public LinkedList<Gate> getGateQueue() {
-    return freeGateQueue;
-  }
-
   public void addPassengers(Gate gate, int amount) {
     try {
       lock.lock();
