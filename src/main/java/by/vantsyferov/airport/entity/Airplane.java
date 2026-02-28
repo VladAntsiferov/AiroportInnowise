@@ -2,13 +2,17 @@ package by.vantsyferov.airport.entity;
 
 import by.vantsyferov.airport.entity.impl.AirplaneArrivingState;
 import by.vantsyferov.airport.entity.impl.AirplaneDepartedState;
+import by.vantsyferov.airport.entity.impl.AirplaneDockedState;
+import by.vantsyferov.airport.entity.impl.AirplaneMaintainingState;
+import by.vantsyferov.airport.service.GateService;
+import by.vantsyferov.airport.service.impl.GateServiceImpl;
 
 public class Airplane extends Thread {
+  private static final GateService gateService = new GateServiceImpl();
   private String name;
   private int capacity;
   private int passengerAmount;
   private AirplaneState airplaneState;
-  private Gate currentGate;
   private boolean isMaintained;
 
   public Airplane(String name, int capacity) {
@@ -33,14 +37,6 @@ public class Airplane extends Thread {
     this.airplaneState = airplaneState;
   }
 
-  public Gate getCurrentGate() {
-    return currentGate;
-  }
-
-  public void setCurrentGate(Gate currentGate) {
-    this.currentGate = currentGate;
-  }
-
   public int getPassengerAmount() {
     return passengerAmount;
   }
@@ -62,10 +58,15 @@ public class Airplane extends Thread {
   @Override
   public void run() {
     setAirplaneState(new AirplaneArrivingState());
-    while (!(airplaneState instanceof AirplaneDepartedState)) {
-      airplaneState.handle(this);
+    Gate gate = gateService.requestFreeGate();
+    while (!(airplaneState instanceof AirplaneDepartedState)){
+      airplaneState.handle(this, gate);
+      if(airplaneState instanceof AirplaneMaintainingState){
+        gate = gateService.requestFreeGate();
+        airplaneState.handle(this, gate);
+      }
     }
-    airplaneState.handle(this);
+    airplaneState.handle(this, gate);
   }
 
 }
